@@ -24,7 +24,7 @@ class Level:
                     tile = Tile((x, y), tile_size, (229, 229, 229))
                     self.tiles.add(tile)
                 if cell == 'P':
-                    pl = Player((x, y))
+                    pl = Player((x, y), self)
                     self.player.add(pl)
                 if cell == 'G':
                     tile = Tile((x, y), tile_size, (0, 229, 0))

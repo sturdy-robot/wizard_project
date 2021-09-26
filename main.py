@@ -1,4 +1,5 @@
 import time
+import sys
 import pygame
 from settings import screen_width, screen_height
 from level import Level
@@ -31,11 +32,14 @@ class Game:
                 if event.type == pygame.QUIT:
                     self.running = False
 
-            self.screen.fill((51, 0, 51))
+            self.screen.fill((65, 0, 52))
             self.calculate_dt()
             self.level.run()
             self.clock.tick(self.FPS)
             pygame.display.flip()
+
+        pygame.quit()
+        sys.exit()
 
 
 if __name__ == '__main__':
