@@ -36,7 +36,13 @@ class Player(pygame.sprite.Sprite):
         self.speed = self.player_speed
         self.gravity = 1
         self.jump_speed = -22
-        self.shoot = False
+
+        # Player shooting powers
+        self.shoot_small_beam = False
+        self.shoot_medium_beam = False
+        self.shoot_big_beam = False
+        self.shoot_enormous_beam = False
+        self.shoot_absurd_beam = False
         # self.collision_rect = pygame.Rect(self.rect.topleft, (10, self.rect.height))
 
     def animate(self):
@@ -103,8 +109,16 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_SPACE] and self.on_ground:
             self.jump()
 
-        if keys[pygame.K_x]:
-            self.shoot = True
+        if keys[pygame.K_z]:
+            self.shoot_small_beam = True
+        elif keys[pygame.K_x]:
+            self.shoot_medium_beam = True
+        elif keys[pygame.K_c]:
+            self.shoot_big_beam = True
+        elif keys[pygame.K_v]:
+            self.shoot_enormous_beam = True
+        elif keys[pygame.K_b]:
+            self.shoot_absurd_beam = True
 
     def apply_gravity(self):
         self.direction.y += self.gravity
