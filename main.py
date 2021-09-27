@@ -32,7 +32,6 @@ class Game:
                 if event.type == pygame.QUIT:
                     self.running = False
 
-            self.screen.fill((65, 0, 52))
             self.calculate_dt()
             self.level.run()
             self.clock.tick(self.FPS)
