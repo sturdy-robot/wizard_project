@@ -9,6 +9,7 @@ class Tile(pygame.sprite.Sprite):
             self.image.fill(color)
         if image is not None:
             self.image = pygame.image.load(image).convert_alpha()
+            self.image = pygame.transform.scale(self.image, (64, 64))
         self.rect = self.image.get_rect(topleft=pos)
 
     def update(self, x_shift):

@@ -25,13 +25,13 @@ class Level:
                 x = j * tile_size
                 y = i * tile_size
                 if cell == 'X':
-                    tile = Tile((x, y), tile_size, image='assets/rockytile.png')
+                    tile = Tile((x, y), tile_size, image='assets/sprite_1.png')
                     self.tiles.add(tile)
                 if cell == 'P':
                     pl = Player((x, y), self)
                     self.player.add(pl)
                 if cell == 'G':
-                    tile = Tile((x, y), tile_size, image='assets/grasstile.png')
+                    tile = Tile((x, y), tile_size, image='assets/sprite_0.png')
                     self.tiles.add(tile)
 
     @staticmethod
@@ -63,17 +63,17 @@ class Level:
             self.player.sprite.shoot_medium_beam = False
 
         if self.player.sprite.shoot_big_beam:
-            power = self.create_player_powers(100, 3)
+            power = self.create_player_powers(100, 4)
             self.power.add(power)
             self.player.sprite.shoot_big_beam = False
 
         if self.player.sprite.shoot_enormous_beam:
-            power = self.create_player_powers(250, 4)
+            power = self.create_player_powers(250, 6)
             self.power.add(power)
             self.player.sprite.shoot_enormous_beam = False
 
         if self.player.sprite.shoot_absurd_beam:
-            power = self.create_player_powers(500, 5)
+            power = self.create_player_powers(500, 10)
             self.power.add(power)
             self.player.sprite.shoot_absurd_beam = False
 
