@@ -15,7 +15,10 @@ class Power(pygame.sprite.Sprite):
             self.image = self.original_image
 
         self.rect = self.image.get_rect()
-        self.rect.center = pos
+        if player_facing_right:
+            self.rect.midleft = (pos[0] - 25, pos[1])
+        else:
+            self.rect.midright = (pos[0] + 25, pos[1])
 
         self.damage = damage
         self.speed = 25

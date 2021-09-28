@@ -40,9 +40,9 @@ class Level:
             data = fp.read().splitlines()
         return data
 
-    def create_player_powers(self, damage, scale, offset):
+    def create_player_powers(self, damage, scale):
         return Power(
-            (self.player.sprite.rect.centerx + offset,
+            (self.player.sprite.rect.centerx,
              self.player.sprite.rect.centery - 8),
             damage=damage,
             direction=self.player.sprite.direction,
@@ -53,27 +53,27 @@ class Level:
 
     def check_player_powers(self):
         if self.player.sprite.shoot_small_beam:
-            power = self.create_player_powers(10, 1, -8)
+            power = self.create_player_powers(10, 1)
             self.power.add(power)
             self.player.sprite.shoot_small_beam = False
 
         if self.player.sprite.shoot_medium_beam:
-            power = self.create_player_powers(50, 2, 8)
+            power = self.create_player_powers(50, 2)
             self.power.add(power)
             self.player.sprite.shoot_medium_beam = False
 
         if self.player.sprite.shoot_big_beam:
-            power = self.create_player_powers(100, 3, 24)
+            power = self.create_player_powers(100, 3)
             self.power.add(power)
             self.player.sprite.shoot_big_beam = False
 
         if self.player.sprite.shoot_enormous_beam:
-            power = self.create_player_powers(250, 4, 40)
+            power = self.create_player_powers(250, 4)
             self.power.add(power)
             self.player.sprite.shoot_enormous_beam = False
 
         if self.player.sprite.shoot_absurd_beam:
-            power = self.create_player_powers(500, 5, 55)
+            power = self.create_player_powers(500, 5)
             self.power.add(power)
             self.player.sprite.shoot_absurd_beam = False
 
