@@ -56,8 +56,8 @@ class Player(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect(midbottom=self.rect.midbottom)
 
-    def vertical_movement_collision(self):
-        self.apply_gravity()
+    def vertical_movement_collision(self, dt):
+        self.apply_gravity(dt)
 
         for sprite in self.level.tiles.sprites():
             if sprite.rect.colliderect(self.rect):
@@ -94,7 +94,7 @@ class Player(pygame.sprite.Sprite):
         if self.on_right and (self.rect.right > self.current_x or self.direction.x <= 0):
             self.on_right = False
 
-    def get_input(self):
+    def get_input(self, dt):
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_RIGHT]:
@@ -107,7 +107,7 @@ class Player(pygame.sprite.Sprite):
             self.direction.x = 0
 
         if keys[pygame.K_SPACE] and self.on_ground:
-            self.jump()
+            self.jump(dt)
 
         if keys[pygame.K_z]:
             self.shoot_small_beam = True
@@ -120,9 +120,9 @@ class Player(pygame.sprite.Sprite):
         elif keys[pygame.K_b]:
             self.shoot_absurd_beam = True
 
-    def apply_gravity(self):
-        self.direction.y += self.gravity
-        self.rect.y += self.direction.y
+    def apply_gravity(self, dt):
+        self.direction.y += self.gravity * dt
+        self.rect.y += self.direction.y * dt
 
     def get_player_on_ground(self):
         if self.on_ground:
@@ -130,11 +130,11 @@ class Player(pygame.sprite.Sprite):
         else:
             self.level.player_on_ground = False
 
-    def scroll_x(self):
+    def scroll_x(self, dt):
         player = self
         player_x = player.rect.centerx
         direction_x = player.direction.x
-        self.level.world_shift_speed = self.player_speed
+        self.level.world_shift_speed = self.player_speed * dt
 
         if player_x < screen_width / 2.8 and direction_x < 0:
             self.level.world_shift = self.level.world_shift_speed
@@ -157,14 +157,14 @@ class Player(pygame.sprite.Sprite):
             else:
                 self.status = 'idle'
 
-    def jump(self):
+    def jump(self, dt):
         self.direction.y += self.jump_speed
 
-    def update(self):
-        self.scroll_x()
-        self.get_input()
+    def update(self, dt):
+        self.scroll_x(dt)
+        self.get_input(dt)
         self.get_status()
         self.horizontal_movement_collision()
-        self.vertical_movement_collision()
+        self.vertical_movement_collision(dt)
         self.animate()
-        self.rect.x += self.direction.x * self.speed
+        self.rect.x += self.direction.x * self.speed * dt

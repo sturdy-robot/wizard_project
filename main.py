@@ -16,14 +16,13 @@ class Game:
         self.prev_time = time.time()
         self.dt = 0
         self.clock = pygame.time.Clock()
-        self.FPS = 60
+        self.FPS = 15
         self.level = Level('map_level.txt', self.screen)
         self.running = True
 
     def calculate_dt(self):
-        now = time.time()
-        self.dt = (now - self.prev_time)
-        self.dt += self.FPS
+        self.dt = (time.time() - self.prev_time)
+        self.dt *= 60
         self.prev_time = time.time()
 
     def start(self):
@@ -33,7 +32,7 @@ class Game:
                     self.running = False
 
             self.calculate_dt()
-            self.level.run()
+            self.level.run(self.dt)
             self.clock.tick(self.FPS)
             pygame.display.flip()
 

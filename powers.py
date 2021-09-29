@@ -27,7 +27,7 @@ class Power(pygame.sprite.Sprite):
         self.direction.y = direction.y
         self.facing_right = player_facing_right
 
-    def update(self, world_shift):
+    def update(self, world_shift, dt):
         if self.facing_right is True:
             self.direction.x = 1
             self.image = self.original_image
@@ -36,7 +36,7 @@ class Power(pygame.sprite.Sprite):
             flipped_image = pygame.transform.flip(self.original_image, True, False)
             self.image = flipped_image
 
-        self.rect.x += (self.speed * self.direction.x)
+        self.rect.x += (self.speed * self.direction.x * dt)
 
         if self.rect.right < 0 or self.rect.left > screen_width:
             self.kill()

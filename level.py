@@ -27,10 +27,10 @@ class Level:
                 if cell == 'X':
                     tile = Tile((x, y), tile_size, image='assets/sprite_1.png')
                     self.tiles.add(tile)
-                if cell == 'P':
+                elif cell == 'P':
                     pl = Player((x, y), self)
                     self.player.add(pl)
-                if cell == 'G':
+                elif cell == 'G':
                     tile = Tile((x, y), tile_size, image='assets/sprite_0.png')
                     self.tiles.add(tile)
 
@@ -77,15 +77,15 @@ class Level:
             self.power.add(power)
             self.player.sprite.shoot_absurd_beam = False
 
-    def run(self):
+    def run(self, dt):
         self.background.draw(self.display_surface)
 
         self.tiles.update(self.world_shift)
         self.tiles.draw(self.display_surface)
 
-        self.player.update()
+        self.player.update(dt)
         self.player.draw(self.display_surface)
         self.check_player_powers()
-        self.power.update(self.world_shift)
+        self.power.update(self.world_shift, dt)
         self.power.draw(self.display_surface)
 
