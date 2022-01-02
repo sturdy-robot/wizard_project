@@ -16,7 +16,7 @@ class Game:
         self.prev_time = time.time()
         self.dt = 0
         self.clock = pygame.time.Clock()
-        self.FPS = 15
+        self.FPS = 60
         self.level = Level('map_level.txt', self.screen)
         self.running = True
 

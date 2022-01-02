@@ -18,8 +18,7 @@ class Level:
         self.world_shift = 0
         self.world_shift_speed = 0
 
-    def setup(self, level_data):
-        map_data = self.read_map_data(level_data)
+    def transform_map_data(self, map_data):
         for i, row in enumerate(map_data):
             for j, cell in enumerate(row):
                 x = j * tile_size
@@ -33,6 +32,10 @@ class Level:
                 elif cell == 'G':
                     tile = Tile((x, y), tile_size, image='assets/sprite_0.png')
                     self.tiles.add(tile)
+
+    def setup(self, level_data):
+        map_data = self.read_map_data(level_data)
+        self.transform_map_data(map_data)
 
     @staticmethod
     def read_map_data(layout):
