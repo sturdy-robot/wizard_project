@@ -125,10 +125,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.y += self.direction.y * dt
 
     def get_player_on_ground(self):
-        if self.on_ground:
-            self.level.player_on_ground = True
-        else:
-            self.level.player_on_ground = False
+        self.level.player_on_ground = bool(self.on_ground)
 
     def scroll_x(self, dt):
         player = self
@@ -152,10 +149,7 @@ class Player(pygame.sprite.Sprite):
         elif self.direction.y > 1:
             self.status = 'fall'
         else:
-            if self.direction.x != 0:
-                self.status = 'run'
-            else:
-                self.status = 'idle'
+            self.status = 'run' if self.direction.x != 0 else 'idle'
 
     def jump(self, dt):
         self.direction.y += self.jump_speed
